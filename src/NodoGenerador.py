@@ -6,6 +6,15 @@ TICK = 1
 
 class NodoGenerador(Nodo):
     def __init__(self, id_nodo, vecinos, canal_entrada, canal_salida):
+        """
+        Inicializa el nodo generador.
+        
+        Args:
+            id_nodo: Identificador único del nodo
+            vecinos: Lista de nodos vecinos
+            canal_entrada: Canal para recibir mensajes
+            canal_salida: Canal para enviar mensajes
+        """
         self.id_nodo = id_nodo
         self.vecinos = vecinos
         self.canal_entrada = canal_entrada
@@ -17,6 +26,19 @@ class NodoGenerador(Nodo):
         self.procesado = False
 
     def genera_arbol(self, env):
+        """
+        Ejecuta el algoritmo distribuido para construir un árbol 
+        
+        El nodo raíz inicia enviando mensajes 'GO' a sus vecinos
+        Los nodos responden con mensajes 'BACK' cuando completan su exploración
+        
+        Args:
+            env: Entorno de simulación Simpy
+            
+        Mensajes:
+            'GO': Asignación de de padres
+            'BACK': Asignación de hijos
+        """
         # Nodo raíz inicia el proceso
         if self.es_raiz and not self.procesado:
             self.procesado = True

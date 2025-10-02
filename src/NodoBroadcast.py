@@ -20,7 +20,13 @@ class NodoBroadcast(Nodo):
 # Si el el nodo envia el mensaje a todos sus hijos en el árbol, en otro caso espera el mensaje, lo almacena y reenvia a sus vecinos excepto al que lo envió.
     def broadcast(self, env):
         ''' Algoritmo de Broadcast. Desde el nodo distinguido (0)
-            vamos a enviar un mensaje a todos los demás nodos.'''
+            vamos a enviar un mensaje a todos los demás nodos.
+            El nodo raíz inicia el broadcast enviando el mensaje a todos sus vecinos
+            Los nodos reciben el mensaje y lo reenvían a sus vecinos
+            
+            Args:
+                env: Entorno de simulación Simpy
+        '''
         # Tú código aquí
         if self.id_nodo == 0:
             yield env.timeout(TICK)
